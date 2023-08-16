@@ -4,4 +4,56 @@
 
 body {
   background-color: #181a1b;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+#calculator {
+  max-width: 400px;
+  margin: 0 auto;
+  border: 2px solid rgba(128, 128, 128, 0.596);
+  border-radius: 5px;
+}
+
+#calculator input {
+  background-color: none;
+  width: 100%;
+  padding: 20px;
+  font-size: 40px;
+  text-align: right;
+  border: none;
+  border-bottom: 2px solid gray;
+  box-shadow: none;
+}
+
+#buttons {
+  display: grid;
+  grid-template: repeat(5, 1fr) / repeat(4, 1fr);
+  padding: 10px;
+}
+
+.btn {
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(128, 128, 128, 0.596);
+  color: white;
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: rgba(255, 255, 255, 0.329);
+}
+.clear,
+.zero {
+  grid-column: span 3;
+}
+
+.equals {
+  background-color: rgba(63, 140, 240, 0.623);
+}
+
+.equals:hover{
+    background-color: rgba(63, 140, 240, 0.89);
 }
