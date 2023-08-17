@@ -50,6 +50,7 @@ function calculate() {
     currentNumber = firstOperand.toString();
     pendingOperation = true;
     operator = null;
+    clearActiveOperatorButton(); // Clear active status after calculation
   }
 }
 
