@@ -20,6 +20,7 @@ function clearDisplay() {
   operator = "";
   firstOperand = "";
   pendingOperation = false;
+  clearActiveOperatorButton();
 }
 
 function calculate() {
@@ -48,14 +49,30 @@ function calculate() {
     display.value = firstOperand;
     currentNumber = firstOperand.toString();
     pendingOperation = true;
+
+    clearActiveOperatorButton();
   }
 }
 
-function setOperator(op) {
+function setOperator(opButton) {
   if (currentNumber) {
-    operator = op;
+    clearActiveOperatorButton();
+
+    const operatorSymbol = opButton.textContent;
+    operator = operatorSymbol === "÷" ? "/" : operatorSymbol;
+    opButton.classList.add("active");
+
     firstOperand = parseFloat(currentNumber);
     currentNumber = "";
     pendingOperation = true;
+  }
+}
+
+function clearActiveOperatorButton() {
+  const activeOperatorButton = document.querySelector(
+    ".button.operator.active"
+  );
+  if (activeOperatorButton) {
+    activeOperatorButton.classList.remove("active");
   }
 }

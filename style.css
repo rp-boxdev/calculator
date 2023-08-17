@@ -46,3 +46,12 @@ body {
 .button:hover {
   background-color: rgba(255, 255, 255, 0.329);
 }
+
+.button.operator.active {
+  background-color: rgba(
+    0,
+    162,
+    255,
+    0.8
+  ); /* Change to your desired active color */
+}
