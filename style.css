@@ -16,7 +16,8 @@ body {
 }
 
 #calculator input {
-  background-color: none;
+  background-color: rgb(236, 236, 236);
+  color: black;
   width: 100%;
   padding: 20px;
   font-size: 40px;
@@ -24,6 +25,12 @@ body {
   border: none;
   border-bottom: 2px solid gray;
   box-shadow: none;
+}
+
+#calculator input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 #buttons {
@@ -54,6 +61,6 @@ body {
   background-color: rgba(63, 140, 240, 0.623);
 }
 
-.equals:hover{
-    background-color: rgba(63, 140, 240, 0.89);
+.equals:hover {
+  background-color: rgba(63, 140, 240, 0.89);
 }

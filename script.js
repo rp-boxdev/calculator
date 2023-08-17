@@ -28,11 +28,11 @@ function operate(x, operator, y) {
 }
 
 function appendNumber(number) {
-  var display = document.getElementById("display");
+  let display = document.getElementById("display");
   display.value += number;
 }
 
 function clearDisplay() {
-    var display = document.getElementById('display');
-    display.value = '';
-  }
+  let display = document.getElementById("display");
+  display.value = "";
+}
