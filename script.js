@@ -1,38 +1,61 @@
-function add(x, y) {
-  return x + y;
-}
+let currentNumber = "";
+let operator = "";
+let firstOperand = "";
+let pendingOperation = false;
 
-function subtract(x, y) {
-  return x - y;
-}
-
-function multiply(x, y) {
-  return x * y;
-}
-
-function divide(x, y) {
-  return x / y;
-}
-
-function operate(x, operator, y) {
-  switch (operator) {
-    case "+":
-      return add(x, y);
-    case "-":
-      return subtract(x, y);
-    case "*":
-      return multiply(x, y);
-    case "/":
-      return divide(x, y);
+function appendToDisplay(value) {
+  const display = document.getElementById("display");
+  if (pendingOperation) {
+    display.value = "";
+    pendingOperation = false;
   }
-}
-
-function appendNumber(number) {
-  let display = document.getElementById("display");
-  display.value += number;
+  currentNumber += value;
+  display.value = currentNumber;
 }
 
 function clearDisplay() {
-  let display = document.getElementById("display");
+  const display = document.getElementById("display");
   display.value = "";
+  currentNumber = "";
+  operator = "";
+  firstOperand = "";
+  pendingOperation = false;
+}
+
+function calculate() {
+  const display = document.getElementById("display");
+  if (operator && currentNumber) {
+    const secondOperand = parseFloat(currentNumber);
+    switch (operator) {
+      case "+":
+        firstOperand += secondOperand;
+        break;
+      case "-":
+        firstOperand -= secondOperand;
+        break;
+      case "*":
+        firstOperand *= secondOperand;
+        break;
+      case "/":
+        if (secondOperand !== 0) {
+          firstOperand /= secondOperand;
+        } else {
+          display.value = "Error";
+          return;
+        }
+        break;
+    }
+    display.value = firstOperand;
+    currentNumber = firstOperand.toString();
+    pendingOperation = true;
+  }
+}
+
+function setOperator(op) {
+  if (currentNumber) {
+    operator = op;
+    firstOperand = parseFloat(currentNumber);
+    currentNumber = "";
+    pendingOperation = true;
+  }
 }
