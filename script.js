@@ -1,6 +1,6 @@
 let currentNumber = "";
-let operator = "";
-let firstOperand = "";
+let operator = null;
+let firstOperand = null;
 let pendingOperation = false;
 
 function appendToDisplay(value) {
@@ -17,15 +17,15 @@ function clearDisplay() {
   const display = document.getElementById("display");
   display.value = "";
   currentNumber = "";
-  operator = "";
-  firstOperand = "";
+  operator = null;
+  firstOperand = null;
   pendingOperation = false;
   clearActiveOperatorButton();
 }
 
 function calculate() {
   const display = document.getElementById("display");
-  if (operator && currentNumber) {
+  if (operator !== null && currentNumber !== "") {
     const secondOperand = parseFloat(currentNumber);
     switch (operator) {
       case "+":
@@ -49,19 +49,18 @@ function calculate() {
     display.value = firstOperand;
     currentNumber = firstOperand.toString();
     pendingOperation = true;
-
-    clearActiveOperatorButton();
+    operator = null;
   }
 }
 
 function setOperator(opButton) {
-  if (currentNumber) {
-    clearActiveOperatorButton();
-
+  if (currentNumber !== "") {
+    if (operator !== null) {
+      calculate();
+    }
     const operatorSymbol = opButton.textContent;
     operator = operatorSymbol === "÷" ? "/" : operatorSymbol;
     opButton.classList.add("active");
-
     firstOperand = parseFloat(currentNumber);
     currentNumber = "";
     pendingOperation = true;
