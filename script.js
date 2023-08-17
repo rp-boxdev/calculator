@@ -3,6 +3,83 @@ let operator = null;
 let firstOperand = null;
 let pendingOperation = false;
 
+// Add an event listener to the whole document to detect key presses
+document.addEventListener("keydown", handleKeyPress);
+
+function handleKeyPress(event) {
+  const key = event.key;
+
+  // Map keys to calculator actions
+  switch (key) {
+    case "0":
+    case "1":
+    case "2":
+    case "3":
+    case "4":
+    case "5":
+    case "6":
+    case "7":
+    case "8":
+    case "9":
+      appendToDisplay(key);
+      break;
+    case "+":
+    case "-":
+    case "*":
+    case "/":
+      setOperatorByKey(key);
+      break;
+    case "=":
+    case "Enter":
+      calculate();
+      break;
+    case "Escape":
+      clearDisplay();
+      break;
+    case "Backspace":
+      handleBackspace();
+      break;
+    case ".":
+      handleDecimal();
+      break;
+  }
+}
+
+function setOperatorByKey(key) {
+  let operatorButton;
+
+  switch (key) {
+    case "+":
+      operatorButton = document.querySelector(".button.operator:nth-child(16)");
+      break;
+    case "-":
+      operatorButton = document.querySelector(".button.operator:nth-child(12)");
+      break;
+    case "*":
+      operatorButton = document.querySelector(".button.operator:nth-child(8)");
+      break;
+    case "/":
+      operatorButton = document.querySelector(".button.operator:nth-child(4)");
+      break;
+  }
+
+  if (operatorButton) {
+    setOperator(operatorButton);
+  }
+}
+
+function handleBackspace() {
+  const display = document.getElementById("display");
+  currentNumber = currentNumber.slice(0, -1);
+  display.value = currentNumber;
+}
+
+function handleDecimal() {
+  if (currentNumber.indexOf(".") === -1) {
+    appendToDisplay(".");
+  }
+}
+
 function appendToDisplay(value) {
   const display = document.getElementById("display");
   if (pendingOperation) {
@@ -41,13 +118,15 @@ function calculate() {
         if (secondOperand !== 0) {
           firstOperand /= secondOperand;
         } else {
-          display.value = "Error";
+          display.value = "NEVER!!!";
           return;
         }
         break;
     }
-    display.value = firstOperand;
-    currentNumber = firstOperand.toString();
+    // Round the result to 2 decimal places
+    const roundedResult = Number(firstOperand.toFixed(14));
+    display.value = roundedResult;
+    currentNumber = roundedResult.toString();
     pendingOperation = true;
     operator = null;
     clearActiveOperatorButton(); // Clear active status after calculation
