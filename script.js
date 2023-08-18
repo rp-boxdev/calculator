@@ -34,6 +34,7 @@ function handleKeyPress(event) {
       calculate();
       break;
     case "Escape":
+    case "c":
       clearDisplay();
       break;
     case "Backspace":
