@@ -124,7 +124,7 @@ function calculate() {
         }
         break;
     }
-    // Round the result to 2 decimal places
+    // Round the result to 14 decimal places
     const roundedResult = Number(firstOperand.toFixed(14));
     display.value = roundedResult;
     currentNumber = roundedResult.toString();
